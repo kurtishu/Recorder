@@ -4,5 +4,52 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/toolbar_text"
+        android:layout_width="match_parent"
+        android:background="@color/colorAccent"
+        android:text="@string/app_name"
+        android:textSize="@dimen/common_btn_text_size"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:layout_height="@dimen/time_counting_margin_top"/>
+
+    <ImageView
+        android:id="@+id/splash_bg"
+        android:layout_below="@id/toolbar_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/fab_margin"
+        android:src="@mipmap/ic_splash_bg"/>
+
+    <TextView
+        android:id="@+id/app_name_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/splash_bg"
+        android:gravity="center"
+        android:textSize="@dimen/common_btn_text_size"
+        android:text="@string/app_name"
+        android:layout_marginTop="@dimen/fab_margin"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/app_name_text"
+        android:gravity="center"
+        android:padding="@dimen/fab_margin"
+        android:text="@string/text_powered_by"/>
+
+    <Button
+        android:id="@+id/request_permission_btn"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/white"
+        android:background="@drawable/commom_btn_selector"
+        android:layout_marginBottom="@dimen/fab_margin"
+        android:text="授权"/>
 
 </RelativeLayout>

@@ -3,6 +3,7 @@ package com.dreamfactory.recorder.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 
 import com.dreamfactory.recorder.R;
 import com.dreamfactory.recorder.ui.base.BaseActivity;
@@ -10,24 +11,29 @@ import com.dreamfactory.recorder.ui.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.OnClick;
 import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 public class SplashActivity extends BaseActivity {
 
+    @BindView(R.id.request_permission_btn)
+    Button mRequestPermissionButton;
+
+    private List<PermissionItem> mPermissions;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        initPermission();
+        requestPermissions();
+    }
 
-//        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-//        SplashActivity.this.finish();
-
-        List<PermissionItem> permissions = new ArrayList<PermissionItem>();
-        permissions.add(new PermissionItem(Manifest.permission.RECORD_AUDIO, getString(R.string.permission_item_audio), R.drawable.permission_ic_micro_phone));
-        permissions.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, getString(R.string.permission_item_sd), R.drawable.permission_ic_storage));
+    private void requestPermissions() {
         HiPermission.create(this)
-                .permissions(permissions)
+                .permissions(mPermissions)
                 .style(R.style.PermissionDefaultGreenStyle)
                 .checkMutiPermission(new PermissionCallback() {
                     @Override
@@ -37,7 +43,7 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onFinish() {
-                      startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
                         SplashActivity.this.finish();
                     }
 
@@ -53,9 +59,21 @@ public class SplashActivity extends BaseActivity {
                 });
     }
 
+    private void initPermission() {
+        mPermissions = new ArrayList<>();
+        mPermissions.add(new PermissionItem(Manifest.permission.RECORD_AUDIO, getString(R.string.permission_item_audio), R.drawable.permission_ic_micro_phone));
+        mPermissions.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE, getString(R.string.permission_item_sd), R.drawable.permission_ic_storage));
+
+    }
+
     @Override
     public int getContentViewRes() {
         return R.layout.activity_splash;
+    }
+
+    @OnClick(R.id.request_permission_btn)
+    protected void onClick() {
+        requestPermissions();
     }
 
 }
