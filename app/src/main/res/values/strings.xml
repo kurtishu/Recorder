@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">录音王</string>
+    <string name="title_activity_splash">SplashActivity</string>
+
+    <string name="permission_item_audio">录音权限</string>
+    <string name="permission_item_sd">SD 卡权限</string>
+</resources>
