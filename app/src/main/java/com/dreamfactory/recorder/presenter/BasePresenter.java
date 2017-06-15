@@ -4,16 +4,16 @@ import com.dreamfactory.recorder.ui.iview.IBaseView;
 
 public class BasePresenter<T extends IBaseView> {
 
-    T mBaseView;
+    T mView;
 
     public BasePresenter(T baseView) {
-        mBaseView = baseView;
+        mView = baseView;
         if (null != baseView) {
             baseView.initViews();
         }
     }
 
     public void onDetach() {
-        mBaseView = null;
+        mView = null;
     }
 }

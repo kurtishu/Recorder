@@ -39,20 +39,29 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     public void OnClick(View view) {
         if (view.getId() == R.id.recording_button) {
            if (!mRecordingButton.getText().toString().equals("停止")) {
-               mRecordingButton.setText("停止");
-               Drawable dra = getResources().getDrawable(R.mipmap.ic_pause);
-               dra.setBounds(0, 0, dra.getMinimumWidth(), dra.getMinimumHeight());
-               mRecordingButton.setCompoundDrawables(null, dra, null,null);
+              mPresenter.startRecording();
            } else {
-               mRecordingButton.setText("录音");
-               Drawable dra = getResources().getDrawable(R.mipmap.ic_play);
-               dra.setBounds(0, 0, dra.getMinimumWidth(), dra.getMinimumHeight());
-               mRecordingButton.setCompoundDrawables(null, dra, null,null);
+               mPresenter.pauseRecording();
            }
         } else if (view.getId() == R.id.stop_button) {
-
+            mPresenter.stopRecording();
         }
     }
 
 
+    @Override
+    public void onRecording() {
+        mRecordingButton.setText("停止");
+        Drawable dra = getResources().getDrawable(R.mipmap.ic_pause);
+        dra.setBounds(0, 0, dra.getMinimumWidth(), dra.getMinimumHeight());
+        mRecordingButton.setCompoundDrawables(null, dra, null,null);
+    }
+
+    @Override
+    public void onStoped() {
+        mRecordingButton.setText("录音");
+        Drawable dra = getResources().getDrawable(R.mipmap.ic_play);
+        dra.setBounds(0, 0, dra.getMinimumWidth(), dra.getMinimumHeight());
+        mRecordingButton.setCompoundDrawables(null, dra, null,null);
+    }
 }

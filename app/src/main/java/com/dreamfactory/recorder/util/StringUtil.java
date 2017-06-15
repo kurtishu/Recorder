@@ -21,4 +21,12 @@ public class StringUtil {
         sb.append(seconds > 9 ? seconds : "0" + hours);
         return sb.toString();
     }
+
+
+    public static boolean isEmpty(String message) {
+        if(message == null || "".equals(message.trim())) {
+            return true;
+        }
+        return false;
+    }
 }
