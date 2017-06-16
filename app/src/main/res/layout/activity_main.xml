@@ -18,13 +18,13 @@
             android:src="@mipmap/ic_menu"/>
 
         <com.dreamfactory.recorder.ui.widget.RecorderTimeCountingTextView
+            android:id="@+id/recording_time_text_view"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textSize="@dimen/time_counting_font_size"
             android:layout_marginTop="@dimen/time_counting_margin_top"
-            android:textColor="@android:color/white"
-            android:text="00:00:00"/>
+            android:textColor="@android:color/white"/>
 
         <ImageView
             android:layout_width="30dp"
@@ -44,14 +44,14 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-        <TextView
+        <com.dreamfactory.recorder.ui.widget.RecorderButton
             android:id="@+id/recording_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:drawableTop="@mipmap/ic_play"
             android:drawablePadding="10dp"
             android:gravity="center"
-            android:text="录音"/>
+            android:text="@string/text_recording_start"/>
 
         <TextView
             android:id="@+id/stop_button"
@@ -61,7 +61,7 @@
             android:drawableTop="@mipmap/ic_stop"
             android:drawablePadding="10dp"
             android:gravity="center"
-            android:text="结束"/>
+            android:text="@string/text_recording_end"/>
 
     </LinearLayout>
 

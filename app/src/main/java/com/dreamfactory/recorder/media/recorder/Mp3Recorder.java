@@ -37,10 +37,6 @@ public class Mp3Recorder implements Recorder{
 
     private OnRecorderStatusChangeListener mListener;
 
-    public Mp3Recorder() {
-        mRecorderFilePath = Constants.FOLDER_URL + File.separator + DateTimeUtils.getDefaultDate() + Constants.RECORDING_NAME;
-    }
-
     @Override
     public boolean initializeRecorder() {
         mBufferSize = AudioRecord.getMinBufferSize(AUDIO_RECORDER_SAMPLE_RATE, AUDIO_RECORDER_CHANNEL_CFG, AUDIO_RECORDER_FORMAT);
@@ -52,6 +48,7 @@ public class Mp3Recorder implements Recorder{
     @Override
     public void startRecording() {
         mIsRecording = true;
+        mRecorderFilePath = Constants.FOLDER_URL + File.separator + DateTimeUtils.getDefaultDate() + Constants.RECORDING_NAME;
         record(false);
     }
 

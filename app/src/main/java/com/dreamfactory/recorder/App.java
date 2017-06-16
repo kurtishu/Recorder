@@ -3,6 +3,8 @@ package com.dreamfactory.recorder;
 import android.app.Application;
 import android.content.Context;
 
+import com.dreamfactory.recorder.application.AppStatusTracker;
+
 public class App extends Application {
 
     private static App mInstance;
@@ -10,6 +12,7 @@ public class App extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
+        AppStatusTracker.init(this);
         mInstance = this;
     }
 

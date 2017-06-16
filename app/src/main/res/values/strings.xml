@@ -4,5 +4,9 @@
 
     <string name="permission_item_audio">录音权限</string>
     <string name="permission_item_sd">SD 卡权限</string>
-    <string name="text_powered_by">Powered By: Augmentum</string>
+    <string name="text_powered_by">Powered By: DreamFactory</string>
+    <string name="text_recording_start">录音</string>
+    <string name="text_recording_end">结束</string>
+    <string name="text_recording_pause">暂停</string>
+    <string name="text_recording_ing">录音运行中...</string>
 </resources>

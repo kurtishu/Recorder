@@ -15,23 +15,20 @@ public class MainPresenter extends BasePresenter<IMainView> {
     }
 
     public void startRecording() {
-        mView.onRecording();
-        performAction(Constants.ACTION_START);
+        RecorderService.performAction(Constants.ACTION_START);
     }
 
     public void stopRecording() {
-        mView.onStoped();
-        performAction(Constants.ACTION_STOP);
+        RecorderService.performAction(Constants.ACTION_STOP);
     }
 
     public void pauseRecording() {
-        mView.onStoped();
-        performAction(Constants.ACTION_PAUSE);
+        RecorderService.performAction(Constants.ACTION_PAUSE);
     }
 
-    private void performAction(String action) {
-        Intent intent = new Intent(App.getContext(), RecorderService.class);
-        intent.putExtra(Constants.KEY_ACTION_RECORDING, action);
-        App.getContext().startService(intent);
+    public void resumeRecording() {
+        RecorderService.performAction(Constants.ACTION_RESUME);
     }
+
+
 }
