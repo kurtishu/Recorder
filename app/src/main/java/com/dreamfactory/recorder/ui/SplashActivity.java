@@ -3,7 +3,8 @@ package com.dreamfactory.recorder.ui;
 import android.Manifest;
 import android.content.Intent;
 import android.os.Bundle;
-import android.widget.Button;
+import android.os.Handler;
+import android.view.WindowManager;
 
 import com.dreamfactory.recorder.R;
 import com.dreamfactory.recorder.ui.base.BaseActivity;
@@ -11,22 +12,20 @@ import com.dreamfactory.recorder.ui.base.BaseActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import me.weyye.hipermission.HiPermission;
 import me.weyye.hipermission.PermissionCallback;
 import me.weyye.hipermission.PermissionItem;
 
 public class SplashActivity extends BaseActivity {
 
-    @BindView(R.id.request_permission_btn)
-    Button mRequestPermissionButton;
-
     private List<PermissionItem> mPermissions;
+    private Handler mUIHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mUIHandler = new Handler();
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         initPermission();
         requestPermissions();
     }
@@ -34,7 +33,7 @@ public class SplashActivity extends BaseActivity {
     private void requestPermissions() {
         HiPermission.create(this)
                 .permissions(mPermissions)
-                .style(R.style.PermissionDefaultGreenStyle)
+                .style(R.style.PermissionDefaultNormalStyle)
                 .checkMutiPermission(new PermissionCallback() {
                     @Override
                     public void onClose() {
@@ -43,8 +42,13 @@ public class SplashActivity extends BaseActivity {
 
                     @Override
                     public void onFinish() {
-                        startActivity(new Intent(SplashActivity.this, MainActivity.class));
-                        SplashActivity.this.finish();
+                        mUIHandler.postDelayed(new Runnable() {
+                            @Override
+                            public void run() {
+                                startActivity(new Intent(SplashActivity.this, MainActivity.class));
+                                SplashActivity.this.finish();
+                            }
+                        }, 2000);
                     }
 
                     @Override
@@ -69,11 +73,6 @@ public class SplashActivity extends BaseActivity {
     @Override
     public int getContentViewRes() {
         return R.layout.activity_splash;
-    }
-
-    @OnClick(R.id.request_permission_btn)
-    protected void onClick() {
-        requestPermissions();
     }
 
 }
