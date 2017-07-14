@@ -6,7 +6,7 @@ import java.util.Locale;
 
 public class DateTimeUtils {
 
-    private static final String DATE_FORMAT_STRING_DEFAULT = "yyyy-MM-ddHH:mm:ss";
+    private static final String DATE_FORMAT_STRING_DEFAULT = "yyyyMMdd-HH:mm:ss";
 
     public static String getDefaultDate() {
         return new SimpleDateFormat(DATE_FORMAT_STRING_DEFAULT, Locale.CHINA).format(new Date());

@@ -20,6 +20,7 @@ public class RecorderService extends Service implements OnRecorderStatusChangeLi
 
     private static final String TAG = RecorderService.class.getName();
     private Recorder mRecorder;
+    private boolean mIsRecording;
 
     public RecorderService() {
     }
@@ -64,11 +65,13 @@ public class RecorderService extends Service implements OnRecorderStatusChangeLi
     @Override
     public void onRecording() {
         //LogUtil.i(TAG, "onRecording...");
+        mIsRecording = true;
     }
 
     @Override
     public void onStoped() {
         LogUtil.i(TAG, "onStoped...");
+        mIsRecording = false;
     }
 
     @Override
@@ -89,7 +92,7 @@ public class RecorderService extends Service implements OnRecorderStatusChangeLi
     }
 
     public void onActivityEnterBackend() {
-        if (!AppStatusTracker.getInstance().isForground()) {
+        if (!AppStatusTracker.getInstance().isForground() && mIsRecording) {
             Intent intent = new Intent(this, MainActivity.class);
             // App enter backend, should show notification
             NotificationUtil.showNotification(RecorderService.this,

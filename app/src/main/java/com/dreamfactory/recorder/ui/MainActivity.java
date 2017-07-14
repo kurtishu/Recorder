@@ -1,5 +1,6 @@
 package com.dreamfactory.recorder.ui;
 
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
 
@@ -10,11 +11,14 @@ import com.dreamfactory.recorder.ui.iview.IMainView;
 import com.dreamfactory.recorder.ui.widget.RecorderButton;
 import com.dreamfactory.recorder.ui.widget.RecorderTimeCountingTextView;
 import com.dreamfactory.recorder.ui.widget.WaveView;
+import com.dreamfactory.recorder.util.StringUtil;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
 public class MainActivity extends BaseActivity<MainPresenter> implements IMainView {
+
+    private static final String TAG = BaseActivity.class.getName();
 
     @BindView(R.id.recording_button)
     RecorderButton mRecordingButton;
@@ -39,6 +43,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
     }
 
     @Override
+    public void onBackPressed() {
+        moveTaskToBack(false);
+    }
+
+    @Override
     public MainPresenter getPresenter() {
         return new MainPresenter(this);
     }
@@ -52,29 +61,36 @@ public class MainActivity extends BaseActivity<MainPresenter> implements IMainVi
         @Override
         public void onStart(View view) {
             mPresenter.startRecording();
-            mTimeView.start();
             mWaveView.start();
         }
 
         @Override
         public void onPause(View view) {
             mPresenter.pauseRecording();
-            mTimeView.pause();
             mWaveView.stop();
         }
 
         @Override
         public void onResume(View view) {
             mPresenter.resumeRecording();
-            mTimeView.resume();
             mWaveView.start();
         }
 
         @Override
         public void onStop(View view) {
             mPresenter.stopRecording();
-            mTimeView.stop();
             mWaveView.stop();
         }
     };
+
+    @Override
+    public void updateRecordingState(int recordDuration) {
+        mTimeView.setText(StringUtil.formatCounting(recordDuration));
+    }
+
+    @Override
+    public void stopRecord() {
+        // TODO stop animation
+    }
+
 }
